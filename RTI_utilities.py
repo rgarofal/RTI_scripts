@@ -51,8 +51,11 @@ report_created_view = 'REPORT_IMPORT_RM132.log'
 report_statistics_view = 'REPORT_STATISTICS_VIEW_%s.sql'
 
 # Old Code list_of_schema_to_import = ['ERICSSON_MME_EPC', 'HUAWEI_MME_EPC', 'ERICSSON_PGW_SGW_EPC', 'HUAWEI_PGW_SGW_EPC', 'HUAWEI_CG', 'ALU_SCP_PREPAID_DRN']
+
+# Relazione fra SOTTOCATEGORIA e SCHEMA (sul foglio excel)
 list_of_schema_to_import = {'ERICSSON_MME_EPC': 'LTE', 'HUAWEI_MME_EPC': 'LTE', 'ERICSSON_PGW_SGW_EPC': 'LTE',
                             'HUAWEI_PGW_SGW_EPC': 'LTE', 'HUAWEI_CG': 'LTE', 'ALU_SCP_PREPAID_DRN': 'SCP'}
+# Relazione fra CATEGORY e SCHEMA (foglio excel)
 map_category_and_new_schema = {'LTE': 'LTE', 'SCP': 'SCP'}
 map_schema_to_macro_category = {'LTE': 'CORE PS', 'SCP': 'IN'}
 
@@ -62,14 +65,18 @@ filter_views = ['BSSGP_MEAS', 'GTP_MEAS', 'MM_MEAS', 'SM_MEAS', 'GB_MEAS', 'GB_M
                 'IU_SM_MEAS', 'GTPU_MEAS', 'PGW_APN_DATA_PLANE', 'GGSN_U_PIC', 'PGW_APN_BEARERS', 'SGW_SESSIONS',
                 'PGW_FW_MEAS', 'SYS_RES_MEAS_CPU', 'S_PGW_SESSION_MEAS', 'S_PGW_FW_MEAS_APN']
 
+# Relazione fra SOTTOCATEGORIA (foglio excel) e Prefisso Nuove Viste
 mapping_schema = {'ERICSSON_MME_EPC': 'V_ERI_MME', 'HUAWEI_MME_EPC': 'V_HUA_MME', 'ERICSSON_PGW_SGW_EPC': 'V_ERI_PGW',
                   'HUAWEI_PGW_SGW_EPC': 'V_HUA_PGW', 'HUAWEI_CG': 'V_CDR', 'ALU_SCP_PREPAID_DRN': 'V_ALU'}
 
+# Suffisso al nome della view per distinguerla. (vedi foglio excel _DRN è uguale alla SOTTOCATEGORIA)
 mapping_schema_subcat = {'ERICSSON_MME_EPC': '', 'HUAWEI_MME_EPC': '', 'ERICSSON_PGW_SGW_EPC': '',
                          'HUAWEI_PGW_SGW_EPC': '', 'HUAWEI_CG': '', 'ALU_SCP_PREPAID_DRN': '_DRN'}
+# Relazione fra Schema di OPTIMA e MACROCATEGORIA (vedi foglio excel)
 mapping_macro_cat = {'ERICSSON_MME_EPC': 'CORE PS', 'HUAWEI_MME_EPC': 'CORE PS', 'ERICSSON_PGW_SGW_EPC': 'CORE PS',
                      'HUAWEI_PGW_SGW_EPC': 'CORE PS', 'HUAWEI_CG': 'CORE PS', 'ALU_SCP_PREPAID_DRN': 'IN'}
 
+# Mapping fra nome view esteso e quella più compatta per non incorrere nell'eerrore del identificativo troppo lungo
 mapping = {'V_ERI_PGW_GGSN_APN_FBC_SERVCLASS': 'V_ERI_PGW_GGSN_APN_FBC_SERVCLS',
            'V_ERI_PGW_GGSN_APN_SACC3_SERVID': 'V_ERI_PGW_GGSN_APN_SACC3_SERVD',
            'V_ERI_PGW_GGSN_U_PIC': 'V_ERI_GGSN_U_PIC',
@@ -679,6 +686,7 @@ def create_script_for_tab_query(directory, name_file_script, name_file_script_ch
                                 list_columns_must_filled):
     import re
 
+    # Associazione SOTTOCATEGORIA (foglio excel)  e prefisso view
     aggregate_mapping = dict()
     aggregate_mapping = dict(V_ERI_MME='ERICSSON MME', V_HUA_MME='HUAWEI MME', V_ERI_PGW='ERICSSON GTW',
                              V_ERI_GGSN='ERICSSON GTW', V_ERI_SGW='ERICSSON GTW', V_ERI_NOD='ERICSSON GTW',
