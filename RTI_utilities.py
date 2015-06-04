@@ -46,7 +46,9 @@ name_file_report_export = 'esportazione_%s.sql'
 name_file_report_import = 'importazione_%s.sql'
 namefile_report_log_import = 'report_importazione_%s.log'
 namefile_stats_scripts_head = 'stats_for_importviews_%s.sql'
-directory_export_ddl = 'C:\\Users\\rgarofal\\Documents\\rgarofal_DOCUMENT\\RTI_SPINDOX\\EXPORT\\UR8CGHuawei'
+directory_base = 'D:\\rgarofal_DOCUMENT\\RTI_SPINDOX\\EXPORT\\'
+directory_category = 'MAVENIR_DSC_DSR'
+directory_export_ddl = (directory_base) + (directory_category)
 report_created_view = 'REPORT_IMPORT_RM132.log'
 report_statistics_view = 'REPORT_STATISTICS_VIEW_%s.sql'
 
@@ -247,7 +249,7 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(test_value, check_starttime_2, msg)
 
     def test_read_inputfile(self):
-        directory_export_ddl = 'C:\\Users\\rgarofal\\Documents\\rgarofal_DOCUMENT\\RTI_SPINDOX\\EXPORT\\TEST'
+        directory_export_ddl = 'D:\\rgarofal_DOCUMENT\\RTI_SPINDOX\\EXPORT\\TEST'
         filename = name_file_report_export % 'PROVA'
         file_dir = directory_export_ddl + "\\"
         with file(file_dir + filename, "r") as file_input:
@@ -257,7 +259,7 @@ class UnitTest(unittest.TestCase):
 
     def test_read_ddl_statement(self):
         print "READ DDL STATEMENT BEGIN"
-        directory_export_ddl = 'C:\\Users\\rgarofal\\Documents\\rgarofal_DOCUMENT\\RTI_SPINDOX\\EXPORT\\TEST'
+        directory_export_ddl = 'D:\\rgarofal_DOCUMENT\\RTI_SPINDOX\\EXPORT\\TEST'
         filename = name_file_report_export % 'PROVA'
         file_dir = directory_export_ddl + "\\"
         with file(file_dir + filename, "r") as file_input:
@@ -781,7 +783,6 @@ if __name__ == '__main__':
 
     #Old Code create_script_for_views('LTE', 'opt')
 
-    directory_export_ddl = 'C:\\Users\\rgarofal\\Documents\\rgarofal_DOCUMENT\\RTI_SPINDOX\\EXPORT\\ALU_SCP_PREPAID_DRN'
     create_script_for_views('opt')
     #report_created_view = 'REPORT_IMPORT_RM132.log'
     report_files = directory_export_ddl + '\\' + report_created_view
