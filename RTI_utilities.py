@@ -382,7 +382,7 @@ def _build_new_ddl(ddl_old, schema_export, schema_import, dblink, mapping_schema
         # sostituisce nel template la stringa
         heading_select_view_adding = 'AS SELECT %s' % adding_columns
         adding_from_select = heading_from_select_adding % (str_starttime, str_starttime)
-        new_ddl.append(string.replace(ddl_old[1], 'AS SELECT ', heading_select_view_adding))
+        new_ddl.append(string.replace(ddl_old[1].upper(), 'AS SELECT ', heading_select_view_adding))
         ind_from = _extract_element_with_from(ddl_old)
         length = len(ddl_old)
         if length == ind_from:
@@ -392,7 +392,7 @@ def _build_new_ddl(ddl_old, schema_export, schema_import, dblink, mapping_schema
         for i in range(2, ind_from):
             new_ddl.append(ddl_old[i])
 
-        initial_list_columns = ddl_old[1].replace('AS SELECT ', '')
+        initial_list_columns = ddl_old[1].upper().replace('AS SELECT ', '')
         new_from_statement = adding_from_select + initial_list_columns
         new_ddl.append(new_from_statement)
         for i in range(2, ind_from):
